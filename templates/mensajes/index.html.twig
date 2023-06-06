@@ -1,0 +1,49 @@
+{# templates/mensaje/mensajes.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Mensajes{% endblock %}
+
+{% block body %}
+
+{% if usuariosReceptores is not empty %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Enviar Mensaje</h1>
+        <form action="{{ path('app_mensajes') }}" method="post">
+            <div class="mb-3">
+                <label for="receptor" class="form-label">Receptor</label>
+                <select class="form-select" id="receptor" name="receptor" required>
+                    {% for usuario in usuariosReceptores %}
+                        <option value="{{ usuario.id }}">{{ usuario.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="contenido" class="form-label">Contenido</label>
+                <textarea class="form-control" id="contenido" name="contenido" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h1>Mensajes Recibidos</h1>
+        {% for mensaje in mensajes %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">De: {{ mensaje.emisor }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Fecha: {{ mensaje.fecha_envio|date('Y-m-d H:i:s') }}</h6>
+                    <p class="card-text">{{ mensaje.contenido }}</p>
+                </div>
+            </div>
+        {% else %}
+            <p>No hay mensajes para mostrar.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

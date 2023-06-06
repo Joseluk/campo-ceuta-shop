@@ -1,0 +1,55 @@
+{# templates/security/register.html.twig #}
+{% extends 'base_unlogged.html.twig' %}
+
+{% block title %}Registro{% endblock %}
+
+{% block body %}
+    <div class="container container-register">
+        <div class="row justify-content-center">
+            <img src="{{ asset('assets/img/default-monochrome-black.svg') }}" class="navbar-brand-img h-100" alt="main_logo" style="height: 90px !important; margin-top:40px; ">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <h5 class="card-title text-center mb-4">Registro</h5>
+                        {{ form_start(registrationForm, { 'attr': {'class': 'row g-3'} }) }}
+                        <div class="mb-3">
+                            {{ form_label(registrationForm.nombre, null, {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(registrationForm.nombre, { 'attr': {'class': 'form-control'} }) }}
+                            <div class="text-danger">{{ form_errors(registrationForm.nombre) }}</div>
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(registrationForm.plainPassword, 'Contraseña', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(registrationForm.plainPassword, { 'attr': {'class': 'form-control'} }) }}
+                            <div class="text-danger">{{ form_errors(registrationForm.plainPassword) }}</div>
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(registrationForm.email, null, {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(registrationForm.email, { 'attr': {'class': 'form-control'} }) }}
+                            <div class="text-danger">{{ form_errors(registrationForm.email) }}</div>
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(registrationForm.domicilio, null, {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(registrationForm.domicilio, { 'attr': {'class': 'form-control'} }) }}
+                            <div class="text-danger">{{ form_errors(registrationForm.domicilio) }}</div>
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(registrationForm.agreeTerms, {'label_attr': {'class': 'form-check-label'}, 'attr': {'class': 'form-check-input'}, 'label': 'Acepto los términos y condiciones'}) }}
+                            <div class="text-danger">{{ form_errors(registrationForm.agreeTerms) }}</div>
+                        </div>
+                        <div class="mb-3 row">
+                            <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+                        </div>
+                        {{ form_end(registrationForm) }}
+
+                        <div class="volver-login">
+                            <div>¿Ya tienes cuenta?</div>
+                            <a href="{{ path('app_login') }}" class="btn btn-lg btn-secondary btn-block"> Iniciar sesión
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Perfil{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header" style="font-size: 16pt">{{ 'Modificar tu perfil de usuario' }}</div>
+
+                    <div class="card-body">
+                        {{ form_start(profileForm, {'attr': {'class': 'form'}}) }}
+                        <div class="mb-3">
+                            {{ form_label(profileForm.nombre, 'Nombre', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(profileForm.nombre, {'attr': {'class': 'form-control'}}) }}
+                            <div class="text-danger">{{ form_errors(profileForm.nombre) }}</div>
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(profileForm.email, 'Correo electrónico', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(profileForm.email, {'attr': {'class': 'form-control'}}) }}
+                            <div class="text-danger">{{ form_errors(profileForm.email) }}</div>
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(profileForm.domicilio, 'Domicilio', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(profileForm.domicilio, {'attr': {'class': 'form-control'}}) }}
+                            <div class="text-danger">{{ form_errors(profileForm.domicilio) }}</div>
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(profileForm.plainPassword, 'Contraseña (Deja en blanco si no quieres cambiarla)', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(profileForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+                            <div class="text-danger">{{ form_errors(profileForm.plainPassword) }}</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary">
+                                {{ 'Actualizar Perfil' }}
+                            </button>
+                        </div>
+                        {{ form_end(profileForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

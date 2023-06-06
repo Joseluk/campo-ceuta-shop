@@ -1,0 +1,153 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ver Producto{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center py-3">Producto</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                {% if producto.imagen %}
+                    <img src="{{ asset('images/productos/' ~ producto.imagen) }}" alt="Imagen del producto" class="img-fluid" style="border-radius: 20px;">
+                {% else %}
+                    Sin imagen
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <div class="card card-producto">
+                    <div class="card-body card-body-producto">
+                        <h5 class="card-title">{{ producto.nombre }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ producto.marca }}</h6>
+                        <p class="card-text">
+                            <strong>Especificación: </strong> {{ producto.especificacion }}<br>
+                            <strong>Categoria: </strong> {{ producto.categoria }}<br>
+                            <strong>Precio: </strong> {% if producto.stock and producto.stock.precio > 0 %}
+                            {{ producto.stock.precio|number_format(2, ',', '.') }} €
+                        {% else %}
+                            Sin stock
+                            {% endif %}<br>
+                        </p>
+                        <!-- Sección de valoraciones -->
+                        <div class="my-3">
+                            <label class="form-label">Valoración</label>
+                            <input id="valoracion" name="valoracion" class="rating rating-loading" data-min="0" data-max="5" data-step="0.5" value="{{ valoracionProducto }}" data-size="lg" data-show-clear="false" >
+                        </div>
+                        <a href="{{ path('carrito_add', {'id': producto.id}) }}" class="btn btn-primary">
+                            <i class="fas fa-cart-plus"></i> Añadir al carrito
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de comentarios y valoraciones -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3>Deja una valoración del producto</h3>
+
+                <!-- Formulario para valorar y comentar -->
+                <form action="{{ path('app_producto_valoracion', {'id': producto.id}) }}" method="post">
+                    <div class="form-group">
+                        <label class="form-label">Valoración</label>
+                        <input id="valoracion-form" name="valoracion" class="rating rating-loading" data-min="0" data-max="5" data-step="0.5" value="0" data-size="md" data-show-clear="false">
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label class="form-label">Comentario</label>
+                        <textarea class="form-control" name="comentario" rows="3" placeholder="Deja tu comentario..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-3">Enviar valoración</button>
+                </form>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12 comentarios-producto">
+                <!-- Recorremos los comentarios con sus valoraciones -->
+                {% for valoracion in valoraciones %}
+                    <div class="card mb-3">
+                        <div class="card-header" style="padding: 1rem 1rem 0 1.5rem;">
+                            <strong>{{ valoracion.usuario.nombre }}</strong>
+                            {% if app.user == valoracion.usuario %}
+                                <a href="{{ path('app_producto_valoracion_edit', {'id_producto': producto.id, 'id_valoracion': valoracion.id}) }}" class="btn btn-sm btn-warning float-end"><i class="fa-solid fa-pen"></i> Editar</a>
+                            {% endif %}
+                        </div>
+                        <div class="card-body" style="padding: 0.5rem 1rem;">
+                            <blockquote class="blockquote mb-0" style="padding: 0 20px;">
+                                <p style="font-style: italic">{{ valoracion.opinion }}</p>
+                                <footer class="blockquote-footer">
+                                    Valoración: <input name="valoracion" value="{{ valoracion.puntuacion }}" class="rating rating-loading valoracion-comentario" data-min="0" data-max="5" data-step="0.5" data-size="xs" data-show-clear="false" />
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/star-rating.min.js" type="text/javascript"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.js"></script>
+
+    <script>
+        (function (factory) {
+
+            if (typeof define === 'function' && define.amd) {
+                define(['jquery'], factory);
+            } else if (typeof module === 'object' && typeof module.exports === 'object') {
+                factory(require('jquery'));
+            } else {
+                factory(window.jQuery);
+            }
+        }(function ($) {
+            $.fn.ratingLocales.en = {
+                defaultCaption: '{rating} Estrellas',
+                starCaptions: {
+                    0.5: 'Media Estrella',
+                    1: 'Una Estrella',
+                    1.5: 'Una Estrella y media',
+                    2: 'Dos Estrellas',
+                    2.5: 'Dos Estrellas y media',
+                    3: 'Tres Estrellas',
+                    3.5: 'Tres Estrellas y media',
+                    4: 'Cuatro Estrellas',
+                    4.5: 'Cuatro Estrellas y media',
+                    5: 'Cinco Estrellas'
+                },
+                starTitles: {
+                    1: "Una estrella",
+                    2: "Dos estrellas",
+                    3: "Tres estrellas",
+                    4: "Cuatro estrellas",
+                    5: "Cinco estrellas"
+                },
+                clearButtonTitle: 'Limpiar',
+                clearCaption: 'Sin Calificar'
+            };
+        }));
+    </script>
+    <script>
+        $("#valoracion").rating({disabled: true, showClear: false});
+        $("#valoracion-form").rating();
+        $(".valoracion-comentario").rating({disabled: true});
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
+
+    <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
+{% endblock %}
+

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestión de Categorías{% endblock %}
+
+{% block body %}
+    <h1>Gestión de Categorías</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorium in categorias %}
+            <tr>
+                <td>{{ categorium.id }}</td>
+                <td>{{ categorium.nombre }}</td>
+                <td>
+                    <a href="{{ path('app_categoria_show', {'id': categorium.id}) }}" class="btn btn-primary">
+                        <i class="fa fa-eye"></i> Ver
+                    </a>
+                    <a href="{{ path('app_categoria_edit', {'id': categorium.id}) }}" class="btn btn-warning">
+                        <i class="fa fa-edit"></i> Editar
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">No se encontraron registros</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categoria_new') }}" class="btn btn-success"><i class="fa-regular fa-plus"></i> Crear nueva</a>
+{% endblock %}

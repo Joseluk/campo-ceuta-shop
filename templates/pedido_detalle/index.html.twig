@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PedidoDetalle index{% endblock %}
+
+{% block body %}
+    <h1>PedidoDetalle index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Cantidad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pedido_detalle in pedido_detalles %}
+            <tr>
+                <td>{{ pedido_detalle.id }}</td>
+                <td>{{ pedido_detalle.cantidad }}</td>
+                <td>
+                    <a href="{{ path('app_pedido_detalle_show', {'id': pedido_detalle.id}) }}">show</a>
+                    <a href="{{ path('app_pedido_detalle_edit', {'id': pedido_detalle.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_pedido_detalle_new') }}">Create new</a>
+{% endblock %}

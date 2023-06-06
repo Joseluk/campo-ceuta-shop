@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Proveedor{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="text-center py-3">Editar Proveedor</h1>
+
+    {{ include('proveedor/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <div class="my-3">
+        <a href="{{ path('app_proveedor_index') }}" class="btn btn-secondary">
+            <i class="fa-solid fa-backward"></i> Volver a la lista
+        </a>
+    </div>
+
+    {{ include('proveedor/_delete_form.html.twig') }}
+</div>
+{% endblock %}

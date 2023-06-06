@@ -1,0 +1,42 @@
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <form class="input-group" action="{{ path('app_search') }}" method="GET">
+                    <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" name="q" placeholder="Escribe aquí..." style="border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important;">
+                    <button type="submit" class="btn btn-outline-primary btn-sm mb-0 me-3">Buscar artículo </button>
+                </form>
+            </div>
+            <ul class="navbar-nav  justify-content-end">
+                <li class="nav-item d-flex align-items-center" style="margin-right: 15px;">
+                    <a href="{{ path('carrito_index') }}" class="nav-link text-body font-weight-bold px-0 position-relative">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        {% if carritoCount is defined and carritoCount > 0 %}
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="transform: translate(-50%, -30%) !important; font-size: 0.5rem">
+                        {{ carritoCount }}
+                        <span class="visually-hidden">items en el carrito</span>
+                            </span>
+                        {% endif %}
+                    </a>
+                </li>
+
+                <li class="nav-item d-flex align-items-center">
+                    <a href="#" class="nav-link text-body font-weight-bold px-0">
+                        <i class="fa fa-user me-sm-1"></i>
+                        <span class="d-sm-inline d-none">Bienvenido {{ user.nombre }}</span>
+                    </a>
+                </li>
+                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="#" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,113 @@
+.alert-danger .alert-text {
+    color: white;
+}
+
+.footer-inicio-sesion {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.container-register .form-check-input {
+    background-color: #dde2c2;
+    margin-left: 10px;
+}
+.form-check-input:checked[type="checkbox"] {
+    background-image: linear-gradient(310deg, #1e4133 0%, #3c745c 100%) !important;
+}
+
+.nav-item .icon-sm i {
+    font-size: 1rem;
+}
+
+.img-thumbnail {
+    height: 100px !important;
+}
+
+.flex-centered {
+    text-align: center;
+}
+
+.carousel-control-next-icon {
+    background-image: url('/assets/img/next-icon.png') !important;
+}
+.carousel-control-prev-icon {
+    background-image: url('/assets/img/prev-icon.png') !important;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: auto !important;
+}
+
+.carousel-inner {
+    padding: 45px 40px;
+}
+.input-campoceuta-header {
+    font-size: 1rem !important;
+    margin-bottom: 0 !important;
+}
+.btn.disabled:hover {
+    cursor: not-allowed !important;
+}
+
+.left-menu-campoceuta {
+    background-image: url("/assets/img/helecho-real.png");
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 100px;
+}
+
+body, .container-fluid.py-4 {
+    background-color: #f6f6df !important;
+}
+
+.text-danger {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: .875em;
+    color: #dc3545;
+}
+
+.volver-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-img {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.carrito-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comentarios-producto {
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+.card-producto {
+    min-height: 570px;
+}
+
+.card-body-producto {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between
+}
+
+.resumen .card {
+    min-height: 160px;
+}

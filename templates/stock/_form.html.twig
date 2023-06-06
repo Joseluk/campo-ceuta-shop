@@ -1,0 +1,13 @@
+{{ form_start(form, {'attr': {'class': 'mb-4'}}) }}
+    {% for field in form %}
+        {% if field.vars.name != '_token' %}
+            <div class="form-group mb-3">
+                {{ form_label(field, null, {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(field, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(field) }}
+            </div>
+        {% endif %}
+    {% endfor %}
+    {{ form_widget(form._token) }} <!-- se incluye el campo de token, pero no se muestra -->
+<button class="btn bg-gradient-success"><i class="fa-solid fa-floppy-disk"></i> {{ button_label|default('Guardar') }}</button>
+{{ form_end(form) }}

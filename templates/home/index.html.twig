@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenido a CampoCeuta!{% endblock %}
+
+{% block body %}
+    {% for categoria in categorias %}
+        <h2>{{ categoria.nombre }}</h2>
+        <div id="carousel{{ categoria.id }}" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for chunk in categoria.productos|batch(4) %}
+                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                        <div class="row">
+                            {% for producto in chunk %}
+                                <div class="col-sm">
+                                    <div class="card card-producto" style="width: 18rem;">
+                                        <div class="card-img">
+                                            <a href="{{ path('app_producto_show', {'id': producto.id}) }}">
+                                                <img src="{{ asset('images/productos/' ~ producto.imagen) }}" class="card-img-top" alt="Imagen del producto">
+                                            </a>
+                                        </div>
+                                        <div class="card-body card-body-producto">
+                                            <a href="{{ path('app_producto_show', {'id': producto.id}) }}">
+                                                <h5 class="card-title">{{ producto.nombre }}</h5>
+                                            </a>
+                                            <p class="card-text">
+                                                Marca: {{ producto.marca }} <br>
+                                                Proveedor: {{ producto.proveedor.nombre }} <br>
+                                                Precio: {% if producto.stock %}{{ producto.stock.precio|number_format(2, ',', '.') }} €{% else %}N/A{% endif %}
+                                            </p>
+                                            <a href="{{ path('carrito_add', {'id': producto.id}) }}" class="btn btn-primary">
+                                                <i class="fas fa-cart-plus"></i> Añadir al carrito
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev custom-arrow" type="button" data-bs-target="#carousel{{ categoria.id }}" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next custom-arrow" type="button" data-bs-target="#carousel{{ categoria.id }}" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    {% else %}
+        <p>No hay categorías.</p>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Carrito{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Carrito de Compras</h1>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>
+                        <img src="{{ vich_uploader_asset(item.producto, 'imageFile') }}" alt="{{ item.producto.nombre }}" class="img-thumbnail">
+                        {{ item.producto.nombre }}
+                    </td>
+                    <td class="flex-centered">
+                        <div style="display: flex; flex-direction: column;">
+                            <div>{{ item.precio_final|number_format(2, ',', '.') }} €</div>
+                            <div style="font-size: 10px; font-style: italic">{{ item.precio|number_format(2, ',', '.') }} € / unidad</div>
+                        </div>
+                    </td>
+                    <td class="flex-centered">{{ item.cantidad }}</td>
+                    <td class="flex-centered">
+                        <a href="{{ path('carrito_add', {'id': item.producto.id}) }}" class="btn btn-success btn-sm">+</a>
+                        <a href="{{ path('carrito_remove', {'id': item.producto.id}) }}" class="btn btn-warning btn-sm">-</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">No hay productos en el carrito</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3" class="text-end"><strong>Total compra:</strong></td>
+                <td class="flex-centered">{{ total|number_format(2, ',', '.') }} €</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="carrito-bottom">
+            {% if items is not empty %}
+                <a href="{{ path('carrito_clear') }}" class="btn btn-danger">Vaciar Carrito  <i class="fa-solid fa-trash"></i></a>
+                <a href="{{ path('carrito_confirmar') }}" class="btn bg-gradient-success">Comprar  <i class="fa-solid fa-credit-card"></i></a>
+            {% else %}
+                <a href="{{ path('carrito_clear') }}" class="btn btn-danger disabled" disabled>Vaciar Carrito  <i class="fa-solid fa-trash"></i></a>
+                <a href="{{ path('carrito_confirmar') }}" class="btn bg-gradient-success disabled" disabled>Comprar  <i class="fa-solid fa-credit-card"></i></a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

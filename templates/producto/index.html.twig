@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestión de Productos{% endblock %}
+
+{% block body %}
+    <h1>Gestión de Productos</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Marca</th>
+                <th>Especificacion</th>
+                <th>Categoria</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for producto in productos %}
+            <tr>
+                <td>{{ producto.id }}</td>
+                <td>
+                    {% if producto.imagen %}
+                        <img src="{{ asset('images/productos/' ~ producto.imagen) }}" alt="Imagen del producto" style="width: 50px; height: 50px;">
+                    {% else %}
+                        Sin imagen
+                    {% endif %}
+                </td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.marca }}</td>
+                <td>{{ producto.especificacion }}</td>
+                <td>{{ producto.categoria }}</td>
+                <td>
+                    <a href="{{ path('app_producto_show', {'id': producto.id}) }}" class="btn btn-primary">
+                        <i class="fa fa-eye"></i> Ver
+                    </a>
+                    <a href="{{ path('app_producto_edit', {'id': producto.id}) }}" class="btn btn-warning">
+                        <i class="fa fa-edit"></i> Editar
+                    </a>
+                    <a href="{{ path('app_producto_delete', {'id': producto.id}) }}" class="btn btn-danger">
+                        <i class="fa-solid fa-trash"></i> Eliminar
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">No se encontraron productos</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_producto_new') }}" class="btn btn-success"><i class="fa-regular fa-plus"></i> Crear nuevo</a>
+
+{% endblock %}

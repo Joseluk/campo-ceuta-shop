@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestión de Stock{% endblock %}
+
+{% block body %}
+    <h1>Gestión de Stock</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for stock in stocks %}
+            <tr>
+                <td>{{ stock.id }}</td>
+                <td>
+                    {% if stock.producto.imagen %}
+                        <img src="{{ asset('images/productos/' ~ stock.producto.imagen) }}" alt="imagen del producto" class="img-thumbnail" width="100">
+                    {% else %}
+                        Sin imagen
+                    {% endif %}
+                </td>
+                <td>{{ stock.cantidad }}</td>
+                <td>{{ stock.precio|number_format(2, ',', '.') }} €</td>
+                <td>
+                    <a href="{{ path('app_stock_show', {'id': stock.id}) }}" class="btn btn-primary">
+                        <i class="fa fa-eye"></i> Ver
+                    </a>
+                    <a href="{{ path('app_stock_edit', {'id': stock.id}) }}" class="btn btn-warning">
+                        <i class="fa fa-edit"></i> Editar
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">No se encontraron registros</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    <a href="{{ path('app_stock_new') }}" class="btn btn-success"><i class="fa-regular fa-plus"></i> Crear nuevo</a>
+{% endblock %}
