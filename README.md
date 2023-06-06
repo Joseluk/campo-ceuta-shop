@@ -6,4 +6,4 @@
 4. Abre `https://localhost` en tu navegador web favorito y [acepta el certificado TLS generado automáticamente](https://stackoverflow.com/a/15076602/1352334).
 5. Ejecuta `make stop` para detener los contenedores de Docker.
 
-[![Run on Google Cloud](https://storage.googleapis.com/cloudrun/button.svg)](https://console.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_image=gcr.io/cloudrun/button&cloudshell_git_repo=https://github.com/Joseluk/bookark.git)
+[![Run on Google Cloud](https://storage.googleapis.com/cloudrun/button.svg)](https://console.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_image=gcr.io/cloudrun/button&cloudshell_git_repo=https://github.com/Joseluk/campo-ceuta-shop.git)
